@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::title},~{::section})}">
+  <head>
+    <title>Login Page</title>
+  </head>
+  <body>
+   <section>
+    <div class="container mt-5">
+        <div class="row mt-5 pt-5">
+            <div class="col-md-4">
+                <div class="card shadow  mb-5 bg-body rounded">
+                    <div class="card-header text-center fs-3">LOGIN</div>
+                    <div class="card-body">
+                        <form action="" th:method="post">
+                            <div class="mb-2">
+                                <label for="">Enter Username</label>
+                                <input type="text" name="username" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Enter Password</label>
+                                <input type="password" name="password" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="btn-w rounded-0 btn btn-success col-md-12">LOGIN NOW</button>
+                            </div>
+                            
+                            <div class="mb-3 text-center">
+                                <label for="">Not Registered?</label>
+                                <a class="text-primary" th:href="@{/register}">Create an account</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   </section>
+  </body>
+</html>
