@@ -1,53 +1,45 @@
 package com.ecommerce.ecommerce.entity;
-import java.util.List;
-import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int addressId;
-    private String addressName;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
     private String city;
     private String state;
     private String zipcode;
     private String mobileNo;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private List<User> user;
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Order> order;
+    @ManyToOne
+    private User user;
     public Address() {
     }
-    public Address(int addressId, String addressName, String city, String state, String zipcode, String mobileNo,
-            List<User> user, Set<Order> order) {
-        this.addressId = addressId;
-        this.addressName = addressName;
+    public Address(int id, String name, String city, String state, String zipcode, String mobileNo, User userId) {
+        this.id = id;
+        this.name = name;
         this.city = city;
         this.state = state;
         this.zipcode = zipcode;
         this.mobileNo = mobileNo;
-        this.user = user;
-        this.order = order;
+        this.user = userId;
     }
-    public int getAddressId() {
-        return addressId;
+    public int getId() {
+        return id;
     }
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
+    public void setId(int id) {
+        this.id = id;
     }
-    public String getAddressName() {
-        return addressName;
+    public String getName() {
+        return name;
     }
-    public void setAddressName(String addressName) {
-        this.addressName = addressName;
+    public void setName(String name) {
+        this.name = name;
     }
     public String getCity() {
         return city;
@@ -73,17 +65,16 @@ public class Address {
     public void setMobileNo(String mobileNo) {
         this.mobileNo = mobileNo;
     }
-    public List<User> getUser() {
+    public User getUserId() {
         return user;
     }
-    public void setUser(List<User> user) {
-        this.user = user;
+    public void setUserId(User userId) {
+        this.user = userId;
     }
-    public Set<Order> getOrder() {
-        return order;
+    @Override
+    public String toString() {
+        return "Address [id=" + id + ", name=" + name + ", city=" + city + ", state=" + state + ", zipcode=" + zipcode
+                + ", mobileNo=" + mobileNo + ", user=" + user + "]";
     }
-    public void setOrder(Set<Order> order) {
-        this.order = order;
-    }
-    
+
 }

@@ -1,17 +1,20 @@
 package com.ecommerce.ecommerce.entity;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;
     private String productName;
     private String description;
@@ -22,20 +25,17 @@ public class Product {
     private int discountedPercent;
     private boolean availability;
     private int quantity;
-
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Category category;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Cart cart;
+    private String category;
+    private List<String> imageUrl;
+    @OneToOne(mappedBy = "productId",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private CartItem cartItem;
 
     public Product() {
     }
 
     public Product(int productId, String productName, String description, String brand, String userType,
             Long originalPrice, Long discountedPrice, int discountedPercent, boolean availability, int quantity,
-            Category category, Cart cart) {
+            String category, List<String> imageUrl) {
         this.productId = productId;
         this.productName = productName;
         this.description = description;
@@ -47,7 +47,7 @@ public class Product {
         this.availability = availability;
         this.quantity = quantity;
         this.category = category;
-        this.cart = cart;
+        this.imageUrl = imageUrl;
     }
 
     public int getProductId() {
@@ -130,20 +130,29 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
-    public Cart getCart() {
-        return cart;
+    public List<String> getImageUrl() {
+        return imageUrl;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setImageUrl(List<String> imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Product [productId=" + productId + ", productName=" + productName + ", description=" + description
+                + ", brand=" + brand + ", userType=" + userType + ", originalPrice=" + originalPrice
+                + ", discountedPrice=" + discountedPrice + ", discountedPercent=" + discountedPercent
+                + ", availability=" + availability + ", quantity=" + quantity + ", category=" + category + ", imageUrl="
+                + imageUrl + ", cartItem=" + cartItem + "]";
     }
 
 }

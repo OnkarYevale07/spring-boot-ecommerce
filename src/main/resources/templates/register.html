@@ -9,22 +9,34 @@
    <section>
     <div class="container mt-5">
         <div class="row  pt-5">
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div class="card shadow  mb-5 bg-body rounded">
-                    <div class="card-header text-center fs-3">REGISTER</div>
+                    <div class="card-header">
+                    <div class="text-center fs-3">REGISTER</div>
+                    <th:block th:if="${session.msg}">
+                        <p class="text-center text-success fs-4">[[${session.msg}]]</p>
+                        <th:block th:text="${@userServiceImpl.removeSessionMessage()}"></th:block>
+                    </th:block>
+                </div>
                     <div class="card-body">
-                        <form action="" th:method="post">
-                            <div class="mb-2">
-                                <label for="">Full Name</label>
-                                <input type="text" name="fullName" class="form-control" required>
-                            </div>
-                            <div class="mb-2">
-                                <label for="">Username</label>
-                                <input type="text" name="username" class="form-control" required>
-                            </div>
+                        <form th:action="@{/user/do_register}" th:method="post">
+                       <div class="name-section mb-2 d-flex col-md-12">
+                        <div class="col-md-6 me-2">
+                            <label for="">First Name</label>
+                            <input type="text" name="firstName" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">Last Name</label>
+                            <input type="text" name="lastName" class="form-control" required>
+                        </div>
+                       </div>
                             <div class="mb-2">
                                 <label for="">Email</label>
                                 <input type="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="">Mobile Number</label>
+                                <input type="text" name="mobileNo" class="form-control" required>
                             </div>
                             <div class="mb-2">
                                 <label for="">Password</label>
@@ -40,7 +52,7 @@
                             
                             <div class="mb-3 text-center">
                                 <label for="">Already have an account?</label>
-                                <a class="text-primary" th:href="@{/login}">Login now</a>
+                                <a class="text-primary" th:href="@{/user/login}">Login now</a>
                             </div>
                         </form>
                     </div>

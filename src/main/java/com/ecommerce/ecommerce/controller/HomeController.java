@@ -10,22 +10,12 @@ public class HomeController {
     public String index(){
         return "home";
     }
-    @GetMapping("/login")
-    public String login(){
-        return "login";
-    }
-    @GetMapping("/register")
-    public String register(){
-        return "register";
-    }
+
     @GetMapping("/products")
     public String getAllProducts(){
         return "products";
     }
-    @GetMapping("/cart")
-    public String getCart(){
-        return "cart";
-    }
+
     @GetMapping("/pd")
     public String getProductDetails(){
         return "productDetail";
