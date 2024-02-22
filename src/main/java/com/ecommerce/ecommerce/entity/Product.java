@@ -8,7 +8,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -26,6 +25,7 @@ public class Product {
     private boolean availability;
     private int quantity;
     private String category;
+    private String secondCategory;
     private List<String> imageUrl;
     @OneToOne(mappedBy = "productId",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private CartItem cartItem;
@@ -35,7 +35,7 @@ public class Product {
 
     public Product(int productId, String productName, String description, String brand, String userType,
             Long originalPrice, Long discountedPrice, int discountedPercent, boolean availability, int quantity,
-            String category, List<String> imageUrl) {
+            String category,String secondCategory, List<String> imageUrl) {
         this.productId = productId;
         this.productName = productName;
         this.description = description;
@@ -47,6 +47,7 @@ public class Product {
         this.availability = availability;
         this.quantity = quantity;
         this.category = category;
+        this.secondCategory = secondCategory;
         this.imageUrl = imageUrl;
     }
 
@@ -136,6 +137,22 @@ public class Product {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getSecondCategory() {
+        return secondCategory;
+    }
+
+    public void setSecondCategory(String secondCategory) {
+        this.secondCategory = secondCategory;
+    }
+
+    public CartItem getCartItem() {
+        return cartItem;
+    }
+
+    public void setCartItem(CartItem cartItem) {
+        this.cartItem = cartItem;
     }
 
     public List<String> getImageUrl() {

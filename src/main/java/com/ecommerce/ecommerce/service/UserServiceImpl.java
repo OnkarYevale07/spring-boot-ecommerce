@@ -49,14 +49,24 @@ public class UserServiceImpl implements UserService{
         return userRepo.save(oldUser);
     }
 
-    public void removeSessionMessage(){
+    public void removeSessionMessage(String msg){
         HttpSession session = ((ServletRequestAttributes)(RequestContextHolder.getRequestAttributes())).getRequest().getSession();
-        session.removeAttribute("msg");
+        session.removeAttribute(msg);
     }
 
     @Override
     public User getUserById(int id) {
         User user = userRepo.findById(id).get();
         return user;
+    }
+
+    @Override
+    public User findByEmail(String email) {
+       User user = userRepo.findByEmail(email);
+       if(user != null){
+        return user;
+       }else{
+        return null;
+       }
     }
 }

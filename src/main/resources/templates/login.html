@@ -13,14 +13,18 @@
                         <div class="text-center fs-3">LOGIN</div>
                         <th:block th:if="${session.msg}">
                             <p class="text-center text-success fs-4">[[${session.msg}]]</p>
-                            <th:block th:text="${@userServiceImpl.removeSessionMessage()}"></th:block>
+                            <th:block th:text="${@userServiceImpl.removeSessionMessage('msg')}"></th:block>
+                        </th:block>
+                        <th:block th:if="${session.msg1}">
+                            <p class="text-center text-danger fs-4">[[${session.msg1}]]</p>
+                            <th:block th:text="${@userServiceImpl.removeSessionMessage('msg1')}"></th:block>
                         </th:block>
                     </div>
                     <div class="card-body">
                         <form th:action="@{/user/do_login}" th:method="post">
                             <div class="mb-2">
                                 <label for="">Enter Username</label>
-                                <input type="email" name="email" class="form-control" required>
+                                <input type="email" name="username" class="form-control" required>
                             </div>
                             <div class="mb-3">
                                 <label for="">Enter Password</label>

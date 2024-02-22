@@ -18,7 +18,7 @@
   <body>
     <!-- Navbar section start -->
     <div class="navbar-section-body">
-      <nav class="shadow p-1 fixed-top mb-5 navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="shadow p-1 fixed-top mb-0 navbar navbar-expand-lg navbar-light bg-light  border-bottom border-1 border-dark">
         <div class="container-fluid">
           <a class="navbar-brand fs-3 ms-5" th:href="@{/}"><img th:src="@{/img/logo1.png}" alt="">AROMA</a>
           <button class="navbar-toggler text-center" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,14 +33,14 @@
                 <a class="nav-link active fs-5" aria-current="page" th:href="@{/products}">Products</a>
               </li>
               <li class="nav-item m-2">
-                <a class="nav-link active fs-5" aria-current="page" th:href="@{/special}">Special</a>
+                <a class="nav-link active fs-5" aria-current="page" th:href="@{/brands}">Brands</a>
               </li>
               <li class="nav-item m-2">
-                <a class="nav-link active fs-5" aria-current="page" th:href="@{/pd}">product details</a>
+                <a class="nav-link active fs-5" aria-current="page" th:href="@{/contact}">Contact Us</a>
               </li>
-              <li class="nav-item m-2">
+              <!-- <li class="nav-item m-2">
                 <a class="nav-link active fs-5" aria-current="page" th:href="@{/user/cart}">Cart</a>
-              </li>
+              </li> -->
             </ul>
             <th:block th:if="${user==NULL}">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -64,8 +64,10 @@
   </li>
 </ul> -->
 
-
-<div class="dropdown ms-auto pe-5">
+<div class="dropdown ms-auto pe-5 d-flex">
+  <li class="nav-item m-2">
+    <a class="nav-link active fs-5" aria-current="page" th:href="@{/user/cart}">Cart</a>
+  </li>
   <button class="btn btn-info dropdown-toggle fw-bold m-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Profile
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

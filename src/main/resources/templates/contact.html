@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::title},~{::section})}">
+  <head>
+    <title>Login Page</title>
+  </head>
+  <body>
+   <section>
+<div class="container pt-3 contact-container">
+  <div class="row col-md-12 text-center mb-3 pb-5">
+    <h3 class="mb-5 contact-heading">- We Strive To Serve You With Only THE BEST! -</h3>
+    <p id="contact-para">We invite you to connect with us, allowing the essence of our enchanting scents to weave a tapestry of olfactory delight in your life.</p> 
+      <p id="contact-para">Our team is dedicated to providing an unforgettable sensory experience, and we’re thrilled to hear from you.</p>
+      <p id="contact-para">
+      Whether you have a question or simply wish to share your thoughts, we welcome all inquiries with open arms. We cherish every opportunity to engage with our valued community.</p>
+      <p id="contact-para">
+      Our dedicated team of customer service professionals is always at your disposal to provide you with fast support so that you can have a simplified shopping experience with us at Belvish.</p>
+  </div>
+  <div class="row col-md-12 my-5 px-5">
+    <div class="col-md-4 contact-card-text d-flex">
+      <div class="left"><i class="fa-solid fa-location-arrow"></i></div>
+      <div class="right"><h4>Location</h4>
+        <p>M-4, Kirti Nagar, New Delhi-110015</p></div></div>
+    <div class="col-md-4 contact-card-text d-flex">
+      <div class="left"><i class="fa-solid fa-phone"></i></div>
+      <div class="right">
+        <h4>Support</h4>
+      <p>Mobile/ Whatsapp: +91 85889 96969<br>
+        Mail: cares@belvish.com</p>
+      </div></div>
+    <div class="col-md-4 contact-card-text d-flex">
+      <div class="left"><i class="fa-regular fa-clock p-0"></i></div>
+      <div class="right"><h4>Get In Touch</h4><p>Tuesday - Sunday 11AM to 08PM. Please note that we are not operational on Mondays. All order placed after Sunday 4pm onwards will start processing on consecutive Tuesdays. In case Tuesday is a public holiday then the orders will be processed on the next business day.</p></div></div>
+  </div>
+</div>
+<div class="container m-0 p-0 d-flex">
+  <div class="left col-md-6">
+    <img th:src="@{/img/product_images/product5.jpg}" class="col-md-12" alt="">
+  </div>
+  <div class="right ms-2 col-md-6">
+    <h4 class="ms-2 contact-heading">Still Having Queries?</h4>
+    <p class="ms-2 contact-form-para">You may simply complete the form below and click ‘send’ to submit an enquiry. Our customer service team <br>will get in touch with you within 3 business days.</p>
+    <div class="container d-flex w-100 h-75 justify-content-center border border-primary">
+      
+    </div>
+  </div>
+</div>
+   </section>
+  </body>
+</html>

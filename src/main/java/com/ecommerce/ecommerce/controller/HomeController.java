@@ -12,13 +12,17 @@ public class HomeController {
     }
 
     @GetMapping("/products")
-    public String getAllProducts(){
+    public String products(){
         return "products";
     }
 
-    @GetMapping("/pd")
-    public String getProductDetails(){
-        return "productDetail";
+    @GetMapping("/contact")
+    public String contact(){
+        return "contact";
+    }
+    @GetMapping("/brands")
+    public String brand(){
+        return "brands";
     }
 
 }

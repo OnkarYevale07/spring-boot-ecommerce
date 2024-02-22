@@ -12,4 +12,6 @@ public interface UserService {
 
     public User getUserById(int id);
 
+    public User findByEmail(String email);
+
 }
