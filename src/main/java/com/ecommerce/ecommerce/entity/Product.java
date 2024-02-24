@@ -1,13 +1,13 @@
 package com.ecommerce.ecommerce.entity;
 
-import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -22,11 +22,11 @@ public class Product {
     private Long originalPrice;
     private Long discountedPrice;
     private int discountedPercent;
-    private boolean availability;
     private int quantity;
-    private String category;
-    private String secondCategory;
-    private List<String> imageUrl;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    private Category category;
+    private String imageName;
     @OneToOne(mappedBy = "productId",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private CartItem cartItem;
 
@@ -34,8 +34,8 @@ public class Product {
     }
 
     public Product(int productId, String productName, String description, String brand, String userType,
-            Long originalPrice, Long discountedPrice, int discountedPercent, boolean availability, int quantity,
-            String category,String secondCategory, List<String> imageUrl) {
+            Long originalPrice, Long discountedPrice, int discountedPercent, int quantity,
+            Category category, String imageName) {
         this.productId = productId;
         this.productName = productName;
         this.description = description;
@@ -44,11 +44,9 @@ public class Product {
         this.originalPrice = originalPrice;
         this.discountedPrice = discountedPrice;
         this.discountedPercent = discountedPercent;
-        this.availability = availability;
         this.quantity = quantity;
         this.category = category;
-        this.secondCategory = secondCategory;
-        this.imageUrl = imageUrl;
+        this.imageName = imageName;
     }
 
     public int getProductId() {
@@ -115,14 +113,6 @@ public class Product {
         this.discountedPercent = discountedPercent;
     }
 
-    public boolean isAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -131,20 +121,12 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public String getSecondCategory() {
-        return secondCategory;
-    }
-
-    public void setSecondCategory(String secondCategory) {
-        this.secondCategory = secondCategory;
     }
 
     public CartItem getCartItem() {
@@ -155,12 +137,12 @@ public class Product {
         this.cartItem = cartItem;
     }
 
-    public List<String> getImageUrl() {
-        return imageUrl;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setImageUrl(List<String> imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageUrl(String imageName) {
+        this.imageName = imageName;
     }
 
     @Override
@@ -168,8 +150,8 @@ public class Product {
         return "Product [productId=" + productId + ", productName=" + productName + ", description=" + description
                 + ", brand=" + brand + ", userType=" + userType + ", originalPrice=" + originalPrice
                 + ", discountedPrice=" + discountedPrice + ", discountedPercent=" + discountedPercent
-                + ", availability=" + availability + ", quantity=" + quantity + ", category=" + category + ", imageUrl="
-                + imageUrl + ", cartItem=" + cartItem + "]";
+                + ", quantity=" + quantity + ", category=" + category + ", imageName="
+                + imageName + ", cartItem=" + cartItem + "]";
     }
 
 }

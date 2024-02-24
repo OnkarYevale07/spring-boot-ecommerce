@@ -344,4 +344,8 @@ letter-spacing: 1px;
 .contact-container{
     margin-top: 200px;
 }
+.contact-form-para{
+    font-size: 12px;
+    font-family: "DM Sans", sans-serif;
+}
 /* contact Us page CSS end */
