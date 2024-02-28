@@ -1,5 +1,7 @@
 package com.ecommerce.ecommerce.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -68,5 +70,10 @@ public class UserServiceImpl implements UserService{
        }else{
         return null;
        }
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepo.findAll();
     }
 }

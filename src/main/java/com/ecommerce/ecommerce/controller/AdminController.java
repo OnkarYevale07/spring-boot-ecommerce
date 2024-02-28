@@ -1,5 +1,8 @@
 package com.ecommerce.ecommerce.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ecommerce.ecommerce.entity.Category;
+import com.ecommerce.ecommerce.entity.Product;
 import com.ecommerce.ecommerce.service.CategoryService;
 import com.ecommerce.ecommerce.service.ProductService;
+import com.ecommerce.ecommerce.service.UserService;
 
 @Controller
 public class AdminController {
@@ -21,6 +28,8 @@ public class AdminController {
     ProductService productService;
     @Autowired
     CategoryService categoryService;
+    @Autowired
+    UserService userService;
 
     @GetMapping("/admin")
     public String adminHome(){
@@ -67,4 +76,31 @@ public class AdminController {
         model.addAttribute("products",productService.getAllProducts());
         return "admin/products";
     }
+
+
+
+    // User Section Start
+    @GetMapping("/admin/users")
+    public String users(Model model){
+        model.addAttribute("users",userService.getAllUsers());
+        return "users";
+    }
+
+
+    @GetMapping("/admin/users")
+    public String getAllUsers(Model model){
+        model.addAttribute("users",userService.getAllUsers());
+        return "users";
+    }
+
+
+    // User Section End
+
+
+
+    // Product Section Start
+     
+
+
+    // Product Section End
 }

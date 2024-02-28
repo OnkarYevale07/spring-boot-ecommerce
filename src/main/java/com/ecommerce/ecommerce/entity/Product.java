@@ -1,5 +1,7 @@
 package com.ecommerce.ecommerce.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,13 +31,15 @@ public class Product {
     private String imageName;
     @OneToOne(mappedBy = "productId",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private CartItem cartItem;
+    private Date createdAt;
 
     public Product() {
     }
 
+
     public Product(int productId, String productName, String description, String brand, String userType,
-            Long originalPrice, Long discountedPrice, int discountedPercent, int quantity,
-            Category category, String imageName) {
+            Long originalPrice, Long discountedPrice, int discountedPercent, int quantity, Category category,
+            String imageName, Date createdAt) {
         this.productId = productId;
         this.productName = productName;
         this.description = description;
@@ -47,7 +51,9 @@ public class Product {
         this.quantity = quantity;
         this.category = category;
         this.imageName = imageName;
+        this.createdAt = createdAt;
     }
+
 
     public int getProductId() {
         return productId;
@@ -144,14 +150,24 @@ public class Product {
     public void setImageUrl(String imageName) {
         this.imageName = imageName;
     }
+    
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
 
     @Override
     public String toString() {
         return "Product [productId=" + productId + ", productName=" + productName + ", description=" + description
                 + ", brand=" + brand + ", userType=" + userType + ", originalPrice=" + originalPrice
-                + ", discountedPrice=" + discountedPrice + ", discountedPercent=" + discountedPercent
-                + ", quantity=" + quantity + ", category=" + category + ", imageName="
-                + imageName + ", cartItem=" + cartItem + "]";
+                + ", discountedPrice=" + discountedPrice + ", discountedPercent=" + discountedPercent + ", quantity="
+                + quantity + ", category=" + category + ", imageName=" + imageName + ", cartItem=" + cartItem
+                + ", createdAt=" + createdAt + "]";
     }
+
 
 }
