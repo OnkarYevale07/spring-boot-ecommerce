@@ -2,6 +2,7 @@ package com.ecommerce.ecommerce.controller;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
@@ -23,6 +24,8 @@ import com.ecommerce.ecommerce.service.UserService;
 
 @Controller
 public class AdminController {
+
+    public static String uploadDir = System.getProperty("user.dir")+"/src/main/resources/static/products";
 
     @Autowired
     ProductService productService;
@@ -100,7 +103,46 @@ public class AdminController {
 
     // Product Section Start
      
+    @GetMapping("/admin/products/add")
+    public String addProduct(Model model){
+        model.addAttribute("productDTO", new Product());
+        model.addAttribute("categories", categoryService.getAllCategories());
+        return "productsAdd";
+    }
 
+    @PostMapping("/admin/products/add")
+    public String productAddPost(@ModelAttribute("productDTO")Product product1,@RequestParam("productImage")MultipartFile file, @RequestParam("imgName")String imgName)throws IOException{
+
+        Product product = new Product();
+        product.setProductId(product1.getProductId());
+        product.setProductName(product1.getProductName());
+        product.setBrand(product1.getBrand());
+        product.setUserType(product1.getUserType());
+        product.setCategory(categoryService.getCategoryById(product1.getCategory().getId()).get());
+        product.setOriginalPrice(product1.getOriginalPrice());
+        product.setDiscountedPrice(product1.getDiscountedPrice());
+        product.setQuantity(product1.getQuantity());
+        product.setDescription(product1.getDescription());
+
+        String imageUUID;
+        if(!file.isEmpty()){
+            imageUUID = file.getOriginalFilename();
+            Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
+            Files.write(fileNameAndPath, file.getBytes());
+        }else{
+            imageUUID = imgName;
+        }
+        product1.setImageName(imageUUID);
+        productService.addProduct(product);
+
+        return "redirect:/admin/products";
+    }
+
+    @GetMapping("/admin/product/delete/{id}")
+    public String deleteProduct(@PathVariable int id){
+        productService.removeProductById(id);
+        return "redirect:/admin/products";
+    }
 
     // Product Section End
 }

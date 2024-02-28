@@ -7,4 +7,8 @@ import com.ecommerce.ecommerce.entity.Product;
 public interface ProductService {
     
     public List<Product> getAllProducts();
+
+    public void addProduct(Product product);
+
+    public void removeProductById(int id);
 }

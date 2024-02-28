@@ -147,7 +147,7 @@ public class Product {
         return imageName;
     }
 
-    public void setImageUrl(String imageName) {
+    public void setImageName(String imageName) {
         this.imageName = imageName;
     }
     

@@ -11,18 +11,19 @@
               <h1>Add Product</h1>
               </div>
               <div class="cart-body m-5">
-      <form th:action="@{/admin/products/add}" th:method="post" class="row g-3">
+      <form th:action="@{/admin/products/add}" th:object="${product}" th:method="post" class="row g-3">
+        <input type="hidden" name="id" th:field="*{productId}">
           <div class="col-md-6">
               <label for="inputEmail4" class="form-label fw-bold">Product Name</label>
-              <input type="text" class="form-control" placeholder="Name" name="pName" required>
+              <input type="text" class="form-control" placeholder="Name" th:field="*{productName}" name="pName" required>
             </div>
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label fw-bold">Brand</label>
-              <input type="text" class="form-control" placeholder="Brand" name="pBrand" required>
+              <input type="text" class="form-control" placeholder="Brand" th:field="*{brand}" name="pBrand" required>
             </div>
           <div class="col-md-6">
               <label for="inputEmail4" class="form-label fw-bold">User Type</label>
-              <select id="inputState" class="form-select" name="userType">
+              <select id="inputState" class="form-select" th:field="*{userType}" name="userType">
                   <option selected>Select Target User</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -31,30 +32,30 @@
           </div>
           <div class="col-md-6">
               <label for="inputState" class="form-label fw-bold">Category</label>
-              <select id="inputState" class="form-select" name="pCategory" required>
+              <select id="inputState" class="form-select" th:field="*{category}" name="pCategory" required>
                 <option selected>Select Category</option>
                 <option></option>
               </select>
           </div>
           <div class="col-md-6">
               <label for="inputEmail4" class="form-label fw-bold">Original Price</label>
-              <input type="number" class="form-control" name="oPrice" placeholder="Original Price" required>
+              <input type="number" class="form-control" th:field="*{originalPrice}" name="oPrice" placeholder="Original Price" required>
             </div>
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label fw-bold">Discounted Price</label>
-              <input type="number" class="form-control" name="dPrice" placeholder="Discounted Price" required>
+              <input type="number" class="form-control" th:field="*{discountedPrice}" name="dPrice" placeholder="Discounted Price" required>
             </div>
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label fw-bold">Quantity</label>
-              <input type="number" class="form-control" name="qty" placeholder="Quantity" required>
+              <input type="number" class="form-control" th:field="*{quantity}" name="qty" placeholder="Quantity" required>
             </div>
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label fw-bold">Select Image</label>
-              <input type="file" class="form-control" name="pImage" placeholder="Product Image" required>
+              <input type="file" class="form-control" th:field="*{imageName}" name="pImage" placeholder="Product Image" required>
             </div>
             <div class="col-md-12">
               <label for="exampleFormControlTextarea1" class="form-label fw-bold">Description</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" name="pDesc" rows="3" placeholder="Description" required></textarea>
+              <textarea class="form-control" th:field="*{description}" id="exampleFormControlTextarea1" name="pDesc" rows="3" placeholder="Description" required></textarea>
             </div>
             
           <div class="col-md-12 mt-5 text-center">
