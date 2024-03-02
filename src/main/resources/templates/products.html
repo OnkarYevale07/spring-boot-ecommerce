@@ -19,16 +19,15 @@
   </div>
 </div>
 <!-- sidebar section end -->
-
 <div class="container-fluid d-flex flex-wrap p-2">
-  <div class="product-card pb-5 shadow-lg p-3 mb-5 bg-body rounded card m-2 p-2">
+  <div class="product-card pb-5 shadow-lg p-3 mb-5 bg-body rounded card m-2 p-2" th:each="product : ${products}">
     <img th:src="@{/img/product_images/product3.jpg}" alt="" id="product-img">
-    <h6 class="pt-2 brand-name">Perfume Musk</h6>
-    <p class="description">Lorem ipsum dolor sit amet consec</p>
-    <h5 class="price">Price : $ 500</h5>
-    <a href="" class="card-btn">Add to Cart</a>
-  </div>    
-  <div class="product-card shadow-lg p-3 mb-5 bg-body rounded card m-2 p-2">
+    <h6 class="pt-2 brand-name" th:text="${product.ProductName}">Perfume Musk</h6>
+    <p class="description" th:text="${product.description}" >Lorem ipsum dolor sit amet consec</p>
+    <h5 class="price">₹ <span th:text="${product.discountedPrice}"></span></h5>
+    <a href="" th:href="@{/shop/viewproduct/{id}(id=${product.ProductId})}" class="card-btn">Add to Cart</a>
+  </div>
+  <!-- <div class="product-card shadow-lg p-3 mb-5 bg-body rounded card m-2 p-2">
     <img th:src="@{/img/product_images/product3.jpg}" alt="" id="product-img">
     <h6 class="pt-2 brand-name">Perfume Musk</h6>
     <p class="description">Lorem ipsum dolor sit amet consec</p>
@@ -100,7 +99,7 @@
       <li class="pagination-no m-2 fs-4"><a class="text-primary" href="#">4</a></li>
       <li class="pagination-no m-2 fs-4"><a class="text-primary" href="#">5</a></li>
     </ul>
-  </div>
+  </div> -->
 </div>
 
 

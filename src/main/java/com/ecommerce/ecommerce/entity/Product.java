@@ -1,6 +1,6 @@
 package com.ecommerce.ecommerce.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -21,9 +21,9 @@ public class Product {
     private String description;
     private String brand;
     private String userType;
-    private Long originalPrice;
-    private Long discountedPrice;
-    private int discountedPercent;
+    private float originalPrice;
+    private float discountedPrice;
+    private float discountedPercent;
     private int quantity;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
@@ -31,15 +31,15 @@ public class Product {
     private String imageName;
     @OneToOne(mappedBy = "productId",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private CartItem cartItem;
-    private Date createdAt;
+    private LocalDate createdAt;
 
     public Product() {
     }
 
 
     public Product(int productId, String productName, String description, String brand, String userType,
-            Long originalPrice, Long discountedPrice, int discountedPercent, int quantity, Category category,
-            String imageName, Date createdAt) {
+    float originalPrice, float discountedPrice, float discountedPercent, int quantity, Category category,
+            String imageName, LocalDate createdAt) {
         this.productId = productId;
         this.productName = productName;
         this.description = description;
@@ -95,27 +95,27 @@ public class Product {
         this.userType = userType;
     }
 
-    public Long getOriginalPrice() {
+    public float getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(Long originalPrice) {
+    public void setOriginalPrice(float originalPrice) {
         this.originalPrice = originalPrice;
     }
 
-    public Long getDiscountedPrice() {
+    public float getDiscountedPrice() {
         return discountedPrice;
     }
 
-    public void setDiscountedPrice(Long discountedPrice) {
+    public void setDiscountedPrice(float discountedPrice) {
         this.discountedPrice = discountedPrice;
     }
 
-    public int getDiscountedPercent() {
+    public float getDiscountedPercent() {
         return discountedPercent;
     }
 
-    public void setDiscountedPercent(int discountedPercent) {
+    public void setDiscountedPercent(float discountedPercent) {
         this.discountedPercent = discountedPercent;
     }
 
@@ -151,11 +151,11 @@ public class Product {
         this.imageName = imageName;
     }
     
-    public Date getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 

@@ -5,57 +5,59 @@
   </head>
   <body>
    <section>
-    <div class="container-fluid w-75 mt-5">
+    <div class="container w-75 mt-5 pt-5">
       <div class="card shadow mb-5 bg-body rounded">
           <div class="card-header text-center">
-              <h1>Add Product</h1>
+              <h1 class="fs-bold">Add Product</h1>
               </div>
-              <div class="cart-body m-5">
-      <form th:action="@{/admin/products/add}" th:object="${product}" th:method="post" class="row g-3">
-        <input type="hidden" name="id" th:field="*{productId}">
+              <div class="cart-body m-5 mt-2">
+                <!-- <form th:action="@{/admin/products/add}" method="post" th:object="${productDTO}" enctype="multipart/form-data"></form> -->
+      <form th:action="@{/admin/products/add}" th:object="${product}" enctype="multipart/form-data" method="post" class="row g-3">
+        <input type="hidden" name="productId" th:field="*{productId}">
           <div class="col-md-6">
               <label for="inputEmail4" class="form-label fw-bold">Product Name</label>
-              <input type="text" class="form-control" placeholder="Name" th:field="*{productName}" name="pName" required>
+              <input type="text" class="form-control" placeholder="Name" th:field="*{productName}" name="productName" required>
             </div>
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label fw-bold">Brand</label>
-              <input type="text" class="form-control" placeholder="Brand" th:field="*{brand}" name="pBrand" required>
+              <input type="text" class="form-control" placeholder="Brand" th:field="*{brand}" name="brand" required>
             </div>
           <div class="col-md-6">
               <label for="inputEmail4" class="form-label fw-bold">User Type</label>
               <select id="inputState" class="form-select" th:field="*{userType}" name="userType">
-                  <option selected>Select Target User</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Unisex">Unisex</option>
+                  <option th:value="NULL" selected>Select Target User</option>
+                  <option th:value="Male">Male</option>
+                  <option th:value="Female">Female</option>
+                  <option th:value="Unisex">Unisex</option>
                 </select>
           </div>
           <div class="col-md-6">
               <label for="inputState" class="form-label fw-bold">Category</label>
-              <select id="inputState" class="form-select" th:field="*{category}" name="pCategory" required>
-                <option selected>Select Category</option>
-                <option></option>
+              <select id="inputState" class="form-select" th:field="*{category}" th:if="@{categories}" name="category" required>
+                <option th:each="category :${categories}"
+                                th:value="${category.id}"
+                                th:text="${category.name}">
               </select>
           </div>
           <div class="col-md-6">
               <label for="inputEmail4" class="form-label fw-bold">Original Price</label>
-              <input type="number" class="form-control" th:field="*{originalPrice}" name="oPrice" placeholder="Original Price" required>
+              <input type="number" class="form-control" th:field="*{originalPrice}" name="originalPrice" placeholder="Original Price" required>
             </div>
             <div class="col-md-6">
-              <label for="inputEmail4" class="form-label fw-bold">Discounted Price</label>
-              <input type="number" class="form-control" th:field="*{discountedPrice}" name="dPrice" placeholder="Discounted Price" required>
+              <label for="inputEmail4" class="form-label fw-bold">Discounted Percent</label>
+              <input type="number" class="form-control" th:field="*{discountedPercent}" name="discountedPercent" placeholder="Discounted Price" required>
             </div>
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label fw-bold">Quantity</label>
-              <input type="number" class="form-control" th:field="*{quantity}" name="qty" placeholder="Quantity" required>
+              <input type="number" class="form-control" th:field="*{quantity}" name="quantity" placeholder="Quantity" required>
             </div>
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label fw-bold">Select Image</label>
-              <input type="file" class="form-control" th:field="*{imageName}" name="pImage" placeholder="Product Image" required>
+              <input type="file" class="form-control" accept="image/jpeg, image/jpg, image/png" th:field="*{imgName}" name="imageName" placeholder="Product Image">
             </div>
             <div class="col-md-12">
               <label for="exampleFormControlTextarea1" class="form-label fw-bold">Description</label>
-              <textarea class="form-control" th:field="*{description}" id="exampleFormControlTextarea1" name="pDesc" rows="3" placeholder="Description" required></textarea>
+              <textarea class="form-control" th:field="*{description}" id="exampleFormControlTextarea1" name="description" rows="3" placeholder="Description" required></textarea>
             </div>
             
           <div class="col-md-12 mt-5 text-center">

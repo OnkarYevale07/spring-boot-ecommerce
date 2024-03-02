@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ecommerce.ecommerce.entity.Category;
 import com.ecommerce.ecommerce.entity.Product;
+import com.ecommerce.ecommerce.global.GlobalData;
 import com.ecommerce.ecommerce.service.CategoryService;
 import com.ecommerce.ecommerce.service.ProductService;
 import com.ecommerce.ecommerce.service.UserService;
@@ -90,13 +92,6 @@ public class AdminController {
     }
 
 
-    @GetMapping("/admin/users")
-    public String getAllUsers(Model model){
-        model.addAttribute("users",userService.getAllUsers());
-        return "users";
-    }
-
-
     // User Section End
 
 
@@ -105,14 +100,13 @@ public class AdminController {
      
     @GetMapping("/admin/products/add")
     public String addProduct(Model model){
-        model.addAttribute("productDTO", new Product());
+        model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "productsAdd";
+        return "admin/addProduct";
     }
-
+    // 
     @PostMapping("/admin/products/add")
-    public String productAddPost(@ModelAttribute("productDTO")Product product1,@RequestParam("productImage")MultipartFile file, @RequestParam("imgName")String imgName)throws IOException{
-
+    public String productAddPost(@ModelAttribute("product")Product product1,@RequestParam("pImage")MultipartFile file, @RequestParam("imgName")String imgName)throws IOException{
         Product product = new Product();
         product.setProductId(product1.getProductId());
         product.setProductName(product1.getProductName());
@@ -120,19 +114,25 @@ public class AdminController {
         product.setUserType(product1.getUserType());
         product.setCategory(categoryService.getCategoryById(product1.getCategory().getId()).get());
         product.setOriginalPrice(product1.getOriginalPrice());
+        product.setDiscountedPercent(product1.getDiscountedPercent());
         product.setDiscountedPrice(product1.getDiscountedPrice());
+        float discPrice = (product1.getOriginalPrice()*product1.getDiscountedPercent())/100;
+        product.setDiscountedPrice(discPrice);
         product.setQuantity(product1.getQuantity());
         product.setDescription(product1.getDescription());
+        LocalDate ld = LocalDate.now();
+        product.setCreatedAt(ld);
 
         String imageUUID;
         if(!file.isEmpty()){
             imageUUID = file.getOriginalFilename();
+            System.out.println(imageUUID);
             Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
             Files.write(fileNameAndPath, file.getBytes());
         }else{
             imageUUID = imgName;
         }
-        product1.setImageName(imageUUID);
+        product.setImageName(imageUUID);
         productService.addProduct(product);
 
         return "redirect:/admin/products";
@@ -145,4 +145,15 @@ public class AdminController {
     }
 
     // Product Section End
+
+
+
+    // Cart Section Start
+
+    @GetMapping("/addToCart/{id}")
+    public String addToCart(@PathVariable int id){
+        GlobalData.cart.add(productService.getProductById(id).get());
+        return "redirect:/shop";
+    }
+    // Cart Section End
 }
