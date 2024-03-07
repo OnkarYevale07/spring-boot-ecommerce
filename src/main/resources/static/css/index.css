@@ -349,3 +349,16 @@ letter-spacing: 1px;
     font-family: "DM Sans", sans-serif;
 }
 /* contact Us page CSS end */
+.container-section{
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+.container1{
+    /* height: 380px !important; */
+    width: 100% !important;
+    border: 2px solid red;
+}
+.row img{
+    height: 32vh;
+}

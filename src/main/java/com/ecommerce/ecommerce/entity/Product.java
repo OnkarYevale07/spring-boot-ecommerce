@@ -25,6 +25,10 @@ public class Product {
     private float discountedPrice;
     private float discountedPercent;
     private int quantity;
+    private int stock;
+
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
@@ -38,8 +42,8 @@ public class Product {
 
 
     public Product(int productId, String productName, String description, String brand, String userType,
-    float originalPrice, float discountedPrice, float discountedPercent, int quantity, Category category,
-            String imageName, LocalDate createdAt) {
+            float originalPrice, float discountedPrice, float discountedPercent, int quantity, int stock,
+            Category category, String imageName, CartItem cartItem, LocalDate createdAt) {
         this.productId = productId;
         this.productName = productName;
         this.description = description;
@@ -49,8 +53,10 @@ public class Product {
         this.discountedPrice = discountedPrice;
         this.discountedPercent = discountedPercent;
         this.quantity = quantity;
+        this.stock = stock;
         this.category = category;
         this.imageName = imageName;
+        this.cartItem = cartItem;
         this.createdAt = createdAt;
     }
 
@@ -157,6 +163,13 @@ public class Product {
 
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
 

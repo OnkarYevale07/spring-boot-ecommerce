@@ -19,14 +19,14 @@
   </div>
 </div>
 <!-- sidebar section end -->
-<div class="container-fluid d-flex flex-wrap p-2">
-  <div class="product-card pb-5 shadow-lg p-3 mb-5 bg-body rounded card m-2 p-2" th:each="product : ${products}">
+<!-- <div class="container-fluid d-flex flex-wrap p-2"> -->
+  <!-- <div class="product-card pb-5 shadow-lg p-3 mb-5 bg-body rounded card m-2 p-2" th:each="product : ${products}">
     <img th:src="@{/img/product_images/product3.jpg}" alt="" id="product-img">
     <h6 class="pt-2 brand-name" th:text="${product.ProductName}">Perfume Musk</h6>
     <p class="description" th:text="${product.description}" >Lorem ipsum dolor sit amet consec</p>
     <h5 class="price">₹ <span th:text="${product.discountedPrice}"></span></h5>
     <a href="" th:href="@{/shop/viewproduct/{id}(id=${product.ProductId})}" class="card-btn">Add to Cart</a>
-  </div>
+  </div> -->
   <!-- <div class="product-card shadow-lg p-3 mb-5 bg-body rounded card m-2 p-2">
     <img th:src="@{/img/product_images/product3.jpg}" alt="" id="product-img">
     <h6 class="pt-2 brand-name">Perfume Musk</h6>
@@ -100,6 +100,31 @@
       <li class="pagination-no m-2 fs-4"><a class="text-primary" href="#">5</a></li>
     </ul>
   </div> -->
+<!-- </div> -->
+
+
+<div class="container-section d-flex flex-wrap">
+  <div class="container1 m-3 py-0" th:each="product, iStat : ${products}">
+    <div class="row1">
+      <img class="px-0" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgATQVmskEeDEJxWV0Cd4mcaZRrmL5H_ta39hTGFly8NJKTY2fFuYfUKM73976arZftvI&usqp=CAU" alt="">
+    </div>
+    <!-- <div class="row text-center fs-4">
+    </div> -->
+    <div class="row1 px-0 col-md-12">
+      <div class="fs-5 d-flex justify-content-between"><span th:text="${product.productName}">Nivea</span><span class="text-end">Quantity: <span th:text="${product.quantity}">500</span>ML</span></div>
+    </div>
+    <div class="row1">
+      <div class="border py-1"><span class="fs-3">₹ <span th:text="${product.discountedPrice}">500</span></span><span class="fs-6"> M.R.P:</span>₹ <span class=" ms-2 text-decoration-line-through" th:text="${product.originalPrice}">299</span><span class="text-success"> <span th:text="${product.discountedPercent}">35</span>% off </span></div>
+    </div>
+    <div class="row1 py-1">
+      <span class="fs-6">FREE Delivery over ₹499. Fulfilled by Amazon</span>
+    </div>
+    <div class="row1 text-center bg-dark text-decoration-none">
+      <a href="www.google.com" class="py-1">SHOP NOW</a>
+    </div>
+  </div>
+
+
 </div>
 
 
