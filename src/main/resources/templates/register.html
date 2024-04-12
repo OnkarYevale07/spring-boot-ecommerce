@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Page</title>
+</head>
+
+<body>
+    <section>
+        <div class="container mt-5 p-5">
+            <div class="row">
+                <div class="col-md-5 p-5">
+                    <img src="img/delivery_logo1.jpeg" width="100%" height="400px" alt="">
+                </div>
+                <div class="col-md-7 p-2">
+                    <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
+                        <div class="card-header">
+                            <p class="fs-4 text-center">
+                                Register
+                            </p>
+                        </div>
+                        <div class="card-body">
+                            <form action="#">
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="name" class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" name="name">
+                                    </div>
+                                    <div class="col mb-3">
+                                        <label for="mobileNumber" class="form-label">Mobile Number</label>
+                                        <input type="number" class="form-control" name="mobileNumber">
+                                    </div>
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="email">
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="address" class="form-label">Address</label>
+                                        <input type="text" class="form-control" name="address">
+                                    </div>
+                                    <div class="col mb-3">
+                                        <label for="city" class="form-label">City</label>
+                                        <input type="text" class="form-control" name="city">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="state" class="form-label">State</label>
+                                        <input type="text" class="form-control" name="state">
+                                    </div>
+                                    <div class="col mb-3">
+                                        <label for="pincode" class="form-label">Pincode</label>
+                                        <input type="number" class="form-control" name="pincode">
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="text" class="form-control" name="password">
+                                    </div>
+                                    <div class="col mb-3">
+                                        <label for="cPassword" class="form-label">Confirm Password</label>
+                                        <input type="password" class="form-control" name="cPassword">
+                                    </div>
+                                </div>
+
+                                <div class="col mb-3">
+                                    <label for="profileImage" class="form-label">Profile Image</label>
+                                    <input type="file" class="form-control" name="profile_image">
+                                </div>
+
+                                <button type="submit" class="btn bg-primary text-white col-md-12">Register</button>
+                            </form>
+                        </div>
+                        <div class="card-footer text-center">
+                            Have an account ?
+                            <a th:href="@{/login}" class="text-decoration-none">Login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
