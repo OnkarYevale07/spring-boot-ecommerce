@@ -11,7 +11,7 @@
     <section>
         <div class="container p-5 mt-3">
             <div class="row">
-                <div class="col-md-6 offset-md-3">
+                <div class="col-md-8 offset-md-2">
                     <div class="card card-sh">
                         <div class="card-header text-center">
                             <p class="fs-4">Edit Product</p>
@@ -35,15 +35,45 @@
                                     <label>Enter Description</label><textarea name="description" cols="" rows="3"
                                         class="form-control">[[${product.description}]]</textarea>
                                 </div>
-                                <div class="mb-3">
-                                    <label>category</label><select class="form-control" name="category">
-                                        <option>[[${product.category}]]</option>
-                                        <option th:each="c:${categories}">[[${c.name}]]</option>
-                                    </select>
+                                <div class="row">
+                                    <div class="mb-3 col">
+                                        <label>category</label><select class="form-control" name="category">
+                                            <option>[[${product.category}]]</option>
+                                            <option th:each="c:${categories}">[[${c.name}]]</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col">
+                                        <label>Enter Price</label><input type="text" name="price" class="form-control"
+                                            th:value="${product.price}" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col">
+                                        <label>Discount</label><input type="number" name="discount" class="form-control"
+                                            th:value="${product.discount}" />
+                                    </div>
+                                    <div class="mb-3 col">
+                                        <label>Discount Price</label><input type="number" readonly class="form-control"
+                                            th:value="${product.discountPrice}" />
+                                    </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label>Enter Price</label><input type="text" name="price" class="form-control"
-                                        th:value="${product.price}" />
+                                    <label>Status</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="isActive"
+                                            id="flexRadioDefault1" value="true" th:checked="${product.isActive==true}">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Active
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="isActive"
+                                            id="flexRadioDefault2" value="false"
+                                            th:checked="${product.isActive==false}">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Inactive
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="mb-3 col">
@@ -54,7 +84,7 @@
                                         <label>Upload Image</label><input type="file" name="file"
                                             class="form-control" />
                                     </div>
-                                    <div class="mt-1">
+                                    <div class="mt-1 mb-2">
                                         <img th:src="@{'/img/product_img/'+${product.image}}" width="100px"
                                             height="100px" />
                                     </div>
