@@ -27,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ecommerce.ecommerce.model.Category;
 import com.ecommerce.ecommerce.model.Product;
 import com.ecommerce.ecommerce.model.UserDtls;
-import com.ecommerce.ecommerce.repository.ProductRepository;
 import com.ecommerce.ecommerce.service.CartService;
 import com.ecommerce.ecommerce.service.CategoryService;
 import com.ecommerce.ecommerce.service.ProductService;
