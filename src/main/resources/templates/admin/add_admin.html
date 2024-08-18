@@ -11,14 +11,11 @@
     <section>
         <div class="container mt-5 p-5">
             <div class="row">
-                <div class="col-md-5 p-5">
-                    <img src="img/delivery_logo1.jpeg" width="100%" height="400px" alt="">
-                </div>
-                <div class="col-md-7 p-2">
+                <div class="col-md-7 p-2 offset-md-2">
                     <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
                         <div class="card-header text-center">
                             <p class="fs-4 text-center">
-                                Register
+                                Add Admin
                             </p>
                             <th:block th:if="${session.succMsg}">
                                 <p class="text-success fw-bold">[[${session.succMsg}]]</p>
@@ -30,8 +27,7 @@
                             </th:block>
                         </div>
                         <div class="card-body">
-                            <form action="/saveUser" enctype="multipart/form-data" method="post" id="userRegister"
-                                novalidate>
+                            <form action="/admin/save-admin" enctype="multipart/form-data" method="post">
                                 <div class="row">
                                     <div class="col mb-3">
                                         <label for="name" class="form-label">Full Name</label>
@@ -74,7 +70,7 @@
                                 <div class="row">
                                     <div class="col mb-3">
                                         <label for="password" class="form-label">Password</label>
-                                        <input type="text" class="form-control" name="password" id="pass" required>
+                                        <input type="text" class="form-control" name="password" required>
                                     </div>
                                     <div class="col mb-3">
                                         <label for="cPassword" class="form-label">Confirm Password</label>
@@ -89,10 +85,6 @@
 
                                 <button type="submit" class="btn bg-primary text-white col-md-12">Register</button>
                             </form>
-                        </div>
-                        <div class="card-footer text-center">
-                            Have an account ?
-                            <a th:href="@{/signin}" class="text-decoration-none">Login</a>
                         </div>
                     </div>
                 </div>

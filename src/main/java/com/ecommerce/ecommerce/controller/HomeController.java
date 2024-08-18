@@ -13,10 +13,12 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -72,7 +74,15 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model m) {
+        List<Category> allActiveCategory = categoryService.getAllActiveCategory().stream()
+                .sorted((c1, c2) -> c2.getId().compareTo(c1.getId()))
+                .limit(6).toList();
+        List<Product> allActiveProducts = productservice.getAllActiveProducts("").stream()
+                .sorted((p1, p2) -> p2.getId().compareTo(p1.getId()))
+                .limit(8).toList();
+        m.addAttribute("category", allActiveCategory);
+        m.addAttribute("products", allActiveProducts);
         return "index";
     }
 
@@ -87,12 +97,33 @@ public class HomeController {
     }
 
     @GetMapping("/products")
-    public String products(Model m, @RequestParam(value = "category", defaultValue = "") String category) {
+    public String products(Model m, @RequestParam(value = "category", defaultValue = "") String category,
+            @RequestParam(name = "pageNo", defaultValue = "0") Integer pageNo,
+            @RequestParam(name = "pageSize", defaultValue = "9") Integer pageSize,
+            @RequestParam(defaultValue = "") String ch) {
         List<Category> categories = categoryService.getAllActiveCategory();
-        List<Product> products = productservice.getAllActiveProducts(category);
-        m.addAttribute("categories", categories);
-        m.addAttribute("products", products);
         m.addAttribute("paramValue", category);
+        m.addAttribute("categories", categories);
+
+        // List<Product> products = productservice.getAllActiveProducts(category);
+        // m.addAttribute("products", products);
+        Page<Product> page = null;
+        if (StringUtils.isEmpty(ch)) {
+            page = productservice.getAllActiveProductPagination(pageNo, pageSize, category);
+        } else {
+            page = productservice.searchActiveProductPagination(pageNo, pageSize, category, ch);
+        }
+
+        List<Product> products = page.getContent();
+        m.addAttribute("products", products);
+        m.addAttribute("productsSize", products.size());
+        m.addAttribute("pageNo", page.getNumber());
+        m.addAttribute("pageSize", pageSize);
+        m.addAttribute("totalElements", page.getTotalElements());
+        m.addAttribute("totalPages", page.getTotalPages());
+        m.addAttribute("isFirst", page.isFirst());
+        m.addAttribute("isLast", page.isLast());
+
         return "product";
     }
 
@@ -106,20 +137,25 @@ public class HomeController {
     @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute UserDtls user, @RequestParam("img") MultipartFile file, HttpSession session)
             throws IOException {
-        String imageName = file.isEmpty() ? "default.jpg" : file.getOriginalFilename();
-        user.setProfileImage(imageName);
-        UserDtls saveUser = userService.saveUser(user);
-        if (!ObjectUtils.isEmpty(saveUser)) {
-            if (!file.isEmpty()) {
-                File saveFile = new ClassPathResource("static/img").getFile();
-                Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "profile_img" + File.separator
-                        + file.getOriginalFilename());
-                // System.out.println(path);
-                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-            }
-            session.setAttribute("succMsg", "Register successfully");
+        Boolean existsEmail = userService.existsEmail(user.getEmail());
+        if (existsEmail) {
+            session.setAttribute("errorMsg", "Email already exist");
         } else {
-            session.setAttribute("errorMsg", "Something wrong on server");
+            String imageName = file.isEmpty() ? "default.jpg" : file.getOriginalFilename();
+            user.setProfileImage(imageName);
+            UserDtls saveUser = userService.saveUser(user);
+            if (!ObjectUtils.isEmpty(saveUser)) {
+                if (!file.isEmpty()) {
+                    File saveFile = new ClassPathResource("static/img").getFile();
+                    Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "profile_img" + File.separator
+                            + file.getOriginalFilename());
+                    // System.out.println(path);
+                    Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+                }
+                session.setAttribute("succMsg", "Register successfully");
+            } else {
+                session.setAttribute("errorMsg", "Something wrong on server");
+            }
         }
         return "redirect:/register";
     }
@@ -180,6 +216,15 @@ public class HomeController {
             m.addAttribute("msg", "Password change successfully");
             return "message";
         }
+    }
+
+    @GetMapping("/search")
+    public String searchProduct(@RequestParam String ch, Model m) {
+        List<Product> searchProduct = productservice.searchProduct(ch);
+        m.addAttribute("products", searchProduct);
+        List<Category> categories = categoryService.getAllActiveCategory();
+        m.addAttribute("categories", categories);
+        return "product";
     }
 
 }

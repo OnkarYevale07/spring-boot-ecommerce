@@ -4,3 +4,42 @@
 .cat-div{
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+.status-progress{
+    background: rgba(125, 129, 130, 0.953);
+    color: #fff;
+    border-radius: 20px;
+    padding: 0.2rem 0.8rem;
+}
+.status-order-received{
+    background: rgba(79, 133, 234, 0.953);
+    color: #fff;
+    border-radius: 20px;
+    padding: 0.2rem 0.8rem;
+}
+.status-product-packed{
+    background: rgba(227, 216, 55, 0.953);
+    color: #fff;
+    border-radius: 20px;
+    padding: 0.2rem 0.8rem;
+}
+.status-out-for-delivery{
+    background: rgba(213, 96, 42, 0.953);
+    color: #fff;
+    border-radius: 20px;
+    padding: 0.2rem 0.8rem;
+}
+.status-delivered{
+    background: #33b248de;
+    color: #fff;
+    border-radius: 20px;
+    padding: 0.2rem 0.8rem;
+}
+.status-cancelled{
+    background: rgba(215, 39, 39, 0.953);
+    color: #fff;
+    border-radius: 20px;
+    padding: 0.2rem 0.8rem;
+}
+.error{
+    color: red;
+}
